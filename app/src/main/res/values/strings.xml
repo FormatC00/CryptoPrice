@@ -1,3 +1,10 @@
 <resources>
   <string name="app_name">CryptoPrice</string>
+  
+  <!-- Common -->
+  <string name="ok">OK</string>
+  <string name="cancel">Cancel</string>
+  <string name="info_alert_title">Info</string>
+  <string name="error_alert_title">Error</string>
+  <string name="back">Back</string>
 </resources>
