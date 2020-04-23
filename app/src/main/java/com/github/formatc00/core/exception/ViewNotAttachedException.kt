@@ -1,3 +1,3 @@
-package com.github.formatc00.mvp.exception
+package com.github.formatc00.core.exception
 
 class ViewNotAttachedException : BaseException()

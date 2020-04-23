@@ -3,6 +3,7 @@ package com.github.formatc00.di.module.fragment
 import com.github.formatc00.di.qualifier.execution.Background
 import com.github.formatc00.di.qualifier.execution.Foreground
 import com.github.formatc00.di.scope.FragmentScope
+import com.github.formatc00.mvp.contract.ListFragmentContract
 import com.github.formatc00.mvp.presenter.ListFragmentPresenter
 import dagger.Module
 import dagger.Provides
@@ -18,5 +19,6 @@ class ListFragmentModule {
         @Background backgroundScheduler: Scheduler,
         @Foreground foregroundScheduler: Scheduler,
         router: Router
-    ) = ListFragmentPresenter(backgroundScheduler, foregroundScheduler, router)
+    ): ListFragmentContract.Presenter =
+        ListFragmentPresenter(backgroundScheduler, foregroundScheduler, router)
 }

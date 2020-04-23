@@ -6,11 +6,8 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import com.github.formatc00.R
 import com.github.formatc00.mvp.base.MessageInterface
-import com.github.formatc00.util.Logger
 
 class AlertMessageInterface(private val activity: Activity) : MessageInterface {
-    
-    private val logger = Logger.create(this)
     
     private var alertDialog: AlertDialog? = null
     
@@ -25,8 +22,6 @@ class AlertMessageInterface(private val activity: Activity) : MessageInterface {
             }
             
             alertDialog = builder.show()
-        } else {
-            logger.d("skip alert message: title=$title;message=$message")
         }
     }
     
@@ -57,10 +52,7 @@ class AlertMessageInterface(private val activity: Activity) : MessageInterface {
         showAlert(activity.getString(R.string.error_alert_title), convertMessage(throwable))
     }
     
-    override fun showError(
-        @StringRes messageResId: Int,
-        confirmationListener: () -> Unit
-    ) {
+    override fun showError(@StringRes messageResId: Int, confirmationListener: () -> Unit) {
         showAlert(
             activity.getString(R.string.error_alert_title),
             activity.getString(messageResId),

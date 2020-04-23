@@ -1,0 +1,15 @@
+ext.getGradleProperty = { propertyName ->
+    return "\"${project.property(propertyName)}\""
+}
+
+ext.getGradleArrayFromProperty = { propertyName ->
+    return "{\"${project.property(propertyName).replace(',', '","')}\"}"
+}
+
+ext.getVersionCode = {
+    String[] parts = projectVersion.split("\\.")
+    int v1 = Integer.parseInt(parts[0])
+    int v2 = Integer.parseInt(parts[1])
+    int v3 = Integer.parseInt(parts[2])
+    return v1 * 1000_000 + v2 * 1000 + v3
+}

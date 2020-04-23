@@ -32,10 +32,6 @@ class Logger private constructor(aClass: Class<*>) {
         
         private val MIN_LEVEL = if (BuildConfig.DEBUG) Log.VERBOSE else Log.ERROR
         
-        fun create(aClass: Class<*>): Logger {
-            return Logger(aClass)
-        }
-        
         fun create(classForSimpleName: Any): Logger {
             return Logger(classForSimpleName.javaClass)
         }

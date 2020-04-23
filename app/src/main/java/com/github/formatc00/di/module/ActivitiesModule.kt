@@ -16,5 +16,5 @@ abstract class ActivitiesModule {
         HomeActivityModule::class,
         NavigationModule::class
     ])
-    abstract fun contributesHomeActivity(): HomeActivity?
+    abstract fun contributesHomeActivity(): HomeActivity
 }

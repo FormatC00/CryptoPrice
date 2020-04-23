@@ -1,6 +1,6 @@
 package com.github.formatc00.mvp.base
 
-import com.github.formatc00.mvp.exception.ViewNotAttachedException
+import com.github.formatc00.core.exception.ViewNotAttachedException
 import com.github.formatc00.util.Logger
 import io.reactivex.Completable
 import io.reactivex.Maybe
@@ -24,6 +24,8 @@ open class BasePresenter<V : BaseContract.View>(
     private var view: V? = null
 
     private var compositeDisposable: CompositeDisposable? = null
+    
+    private var firstAttach = true
 
     override fun isViewAttached() = view != null
 
@@ -38,7 +40,14 @@ open class BasePresenter<V : BaseContract.View>(
             this.compositeDisposable = CompositeDisposable()
         }
         this.view = view
+    
+        if (firstAttach) {
+            firstAttach = false
+            onFirstAttach()
+        }
     }
+    
+    protected open fun onFirstAttach() {}
 
     override fun detachView() {
         this.compositeDisposable?.dispose()

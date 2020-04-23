@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: "../versions.gradle"
 apply plugin: "kotlin-kapt"
+apply from: '../utils.gradle'
 
 android {
     compileSdkVersion versions.android.compileSdk
@@ -16,6 +17,7 @@ android {
         versionCode versions.application.versionCode
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BASE_API_URL", "${getGradleProperty('api_url')}"
     }
 
     buildTypes {
