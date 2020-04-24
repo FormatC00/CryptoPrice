@@ -12,8 +12,6 @@ abstract class BaseNavigator internal constructor(
     private val fragmentActivity: FragmentActivity
 ) : SupportAppNavigator(fragmentActivity, containerId) {
     
-    val topFragment = fragmentActivity.supportFragmentManager.findFragmentById(containerId)
-  
     override fun setupFragmentTransaction(
         command: Command,
         currentFragment: Fragment?,

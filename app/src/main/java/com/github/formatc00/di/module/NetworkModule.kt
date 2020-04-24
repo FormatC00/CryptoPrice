@@ -2,7 +2,6 @@ package com.github.formatc00.di.module
 
 import com.github.formatc00.BuildConfig
 import com.github.formatc00.data.network.CryptoApi
-import com.github.formatc00.data.network.interceptor.ErrorHandlingInterceptor
 import com.github.formatc00.util.Logger
 import dagger.Module
 import dagger.Provides
@@ -35,12 +34,10 @@ class NetworkModule {
     @Singleton
     fun provideDefaultOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        errorHandlingInterceptor: ErrorHandlingInterceptor,
         pinner: CertificatePinner
     ) = OkHttpClient().newBuilder()
         .certificatePinner(pinner)
         .addInterceptor(loggingInterceptor)
-        .addInterceptor(errorHandlingInterceptor)
         .connectTimeout(TIMEOUT.toLong(), TimeUnit.SECONDS)
         .readTimeout(TIMEOUT.toLong(), TimeUnit.SECONDS)
         .build()

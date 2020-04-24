@@ -18,29 +18,29 @@ open class BasePresenter<V : BaseContract.View>(
     private val foregroundScheduler: Scheduler,
     val router: Router
 ) : BaseContract.Presenter<V> {
-
+    
     private val logger = Logger.create(this)
-
+    
     private var view: V? = null
-
+    
     private var compositeDisposable: CompositeDisposable? = null
     
     private var firstAttach = true
-
+    
     override fun isViewAttached() = view != null
-
+    
     override fun onError(throwable: Throwable) {
         if (isViewAttached()) {
             getView().onError(throwable)
         }
     }
-
+    
     override fun attachView(view: V) {
         if (compositeDisposable == null || compositeDisposable!!.isDisposed) {
             this.compositeDisposable = CompositeDisposable()
         }
         this.view = view
-    
+        
         if (firstAttach) {
             firstAttach = false
             onFirstAttach()
@@ -48,31 +48,28 @@ open class BasePresenter<V : BaseContract.View>(
     }
     
     protected open fun onFirstAttach() {}
-
+    
     override fun detachView() {
         this.compositeDisposable?.dispose()
         this.view = null
     }
-
+    
     override fun getView(): V {
         if (view == null) {
             throw ViewNotAttachedException()
         }
         return view as V
     }
-
-    protected fun <T> subscribe(
-        upstream: Observable<T>,
-        onNext: Consumer<T>
-    ): Disposable {
+    
+    protected fun <T> subscribe(upstream: Observable<T>, onNext: Consumer<T>): Disposable {
         val disposable = upstream.subscribeOn(backgroundScheduler)
             .observeOn(foregroundScheduler)
             .subscribe(onNext, Consumer { this.onError(it) })
-
+        
         addDisposable(disposable)
         return disposable
     }
-
+    
     protected fun <T> subscribe(
         upstream: Maybe<T>,
         onNext: Consumer<T>
@@ -80,26 +77,26 @@ open class BasePresenter<V : BaseContract.View>(
         val disposable = upstream.subscribeOn(backgroundScheduler)
             .observeOn(foregroundScheduler)
             .subscribe(onNext, Consumer { this.onError(it) })
-
+        
         addDisposable(disposable)
     }
-
+    
     protected fun <T> subscribe(upstream: Single<T>, onSuccess: Consumer<T>) {
         val disposable = upstream.subscribeOn(backgroundScheduler)
             .observeOn(foregroundScheduler)
             .subscribe(onSuccess, Consumer { this.onError(it) })
-
+        
         addDisposable(disposable)
     }
-
+    
     protected fun subscribe(upstream: Completable, onComplete: Action) {
         val disposable = upstream.subscribeOn(backgroundScheduler)
             .observeOn(foregroundScheduler)
             .subscribe(onComplete, Consumer { this.onError(it) })
-
+        
         addDisposable(disposable)
     }
-
+    
     protected fun <T> subscribeWithProgress(
         upstream: Observable<T>,
         onNext: Consumer<T>,
@@ -111,10 +108,10 @@ open class BasePresenter<V : BaseContract.View>(
             .observeOn(foregroundScheduler)
             .doOnTerminate(hideProgress)
             .subscribe(onNext, Consumer { this.onError(it) })
-
+        
         addDisposable(disposable)
     }
-
+    
     protected fun <T> subscribeWithProgress(
         upstream: Single<T>,
         onSuccess: Consumer<T>,
@@ -126,10 +123,10 @@ open class BasePresenter<V : BaseContract.View>(
             .observeOn(foregroundScheduler)
             .doAfterTerminate(hideProgress)
             .subscribe(onSuccess, Consumer { this.onError(it) })
-
+        
         addDisposable(disposable)
     }
-
+    
     protected fun subscribeWithProgress(
         upstream: Completable,
         onComplete: Action,
@@ -141,10 +138,10 @@ open class BasePresenter<V : BaseContract.View>(
             .observeOn(foregroundScheduler)
             .doOnTerminate(hideProgress)
             .subscribe(onComplete, Consumer { this.onError(it) })
-
+        
         addDisposable(disposable)
     }
-
+    
     protected fun subscribeWithProgressInUiThread(
         upstream: Completable,
         onComplete: Action
@@ -154,10 +151,10 @@ open class BasePresenter<V : BaseContract.View>(
             .observeOn(foregroundScheduler)
             .doFinally { getView().hideProgress() }
             .subscribe(onComplete, Consumer { this.onError(it) })
-
+        
         addDisposable(disposable)
     }
-
+    
     private fun addDisposable(disposable: Disposable) {
         compositeDisposable?.add(disposable)
     }

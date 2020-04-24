@@ -4,5 +4,6 @@ data class Cryptocurrency(
     val id: Long?,
     val name: String?,
     val symbol: String?,
-    val rank: Int?
+    val rank: Int?,
+    var metadata: CryptocurrencyMetadata? = null
 )
