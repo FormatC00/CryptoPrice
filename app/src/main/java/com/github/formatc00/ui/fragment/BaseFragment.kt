@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
-import androidx.fragment.app.ListFragment
 import com.github.formatc00.mvp.base.BaseContract
 import com.github.formatc00.ui.activity.BaseActivity
 import com.github.formatc00.util.Logger

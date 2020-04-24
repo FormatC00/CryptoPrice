@@ -1,7 +1,6 @@
 package com.github.formatc00.di.module.activity
 
 import android.app.Activity
-import com.github.formatc00.core.facade.CryptoFacade
 import com.github.formatc00.di.qualifier.execution.Background
 import com.github.formatc00.di.qualifier.execution.Foreground
 import com.github.formatc00.di.scope.ActivityScope
@@ -34,10 +33,9 @@ class HomeActivityModule {
     fun providePresenter(
         @Background backgroundScheduler: Scheduler,
         @Foreground foregroundScheduler: Scheduler,
-        router: Router,
-        cryptoFacade: CryptoFacade
+        router: Router
     ): HomeActivityContract.Presenter =
-        HomeActivityPresenter(backgroundScheduler, foregroundScheduler, router, cryptoFacade)
+        HomeActivityPresenter(backgroundScheduler, foregroundScheduler, router)
     
     @ActivityScope
     @Provides
