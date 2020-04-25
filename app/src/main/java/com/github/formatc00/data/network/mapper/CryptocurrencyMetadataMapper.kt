@@ -11,10 +11,10 @@ class CryptocurrencyMetadataMapper @Inject constructor(
     
     fun map(response: CryptocurrencyMetadataResponse): List<CryptocurrencyMetadata> {
         val data = response.data ?: return listOf()
-        return data.toList().map { it.second }.map(this::map)
+        return data.toList().map { mapToMetadata(it.second) }
     }
     
-    fun map(metadataNetwork: CryptocurrencyMetadataNetwork) = metadataNetwork.run {
+    fun mapToMetadata(metadataNetwork: CryptocurrencyMetadataNetwork) = metadataNetwork.run {
         CryptocurrencyMetadata(id, description, logoUrl, cryptocurrencyUrlsMapper.map(urls))
     }
 }

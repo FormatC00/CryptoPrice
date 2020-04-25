@@ -2,11 +2,14 @@ package com.github.formatc00.core.repository
 
 import com.github.formatc00.core.entity.Cryptocurrency
 import com.github.formatc00.core.entity.CryptocurrencyMetadata
+import com.github.formatc00.core.entity.CryptocurrencyQuote
 import io.reactivex.Single
 
 interface CryptoRepository {
     
-    fun getCryptocurrencyMap(): Single<List<Cryptocurrency>>
+    fun getMap(): Single<List<Cryptocurrency>>
     
-    fun getCryptocurrenciesMetadata(ids: String): Single<List<CryptocurrencyMetadata>>
+    fun getMetadata(ids: String): Single<List<CryptocurrencyMetadata>>
+    
+    fun getQuote(ids: String): Single<List<CryptocurrencyQuote>>
 }

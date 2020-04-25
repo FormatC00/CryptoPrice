@@ -1,5 +1,6 @@
 package com.github.formatc00.di.module.fragment
 
+import com.github.formatc00.core.facade.CryptoFacade
 import com.github.formatc00.di.qualifier.execution.Background
 import com.github.formatc00.di.qualifier.execution.Foreground
 import com.github.formatc00.di.scope.FragmentScope
@@ -18,7 +19,8 @@ class CryptoListFragmentModule {
     fun providePresenter(
         @Background backgroundScheduler: Scheduler,
         @Foreground foregroundScheduler: Scheduler,
-        router: Router
+        router: Router,
+        cryptoFacade: CryptoFacade
     ): CryptoListFragmentContract.Presenter =
-        CryptoListFragmentPresenter(backgroundScheduler, foregroundScheduler, router)
+        CryptoListFragmentPresenter(backgroundScheduler, foregroundScheduler, router, cryptoFacade)
 }
