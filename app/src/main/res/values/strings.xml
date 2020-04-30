@@ -7,4 +7,14 @@
   <string name="info_alert_title">Info</string>
   <string name="error_alert_title">Error</string>
   <string name="back">Back</string>
+  
+  <string name="price_difference_pattern">%1$s%2$.2f%%</string>
+  <string name="price_pattern">$%1$.2f</string>
+  <string name="capitalization_pattern">Cap: %1$s</string>
+  
+  <string name="thousand_pattern">%1$.2f K</string>
+  <string name="million_pattern">%1$.2f M</string>
+  <string name="billion_pattern">%1$.2f Bn</string>
+  <string name="trillion_pattern">%1$.2f Tn</string>
+  <string name="quadrillion_pattern">%1$.2f Qn</string>
 </resources>

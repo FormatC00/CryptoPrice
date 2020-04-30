@@ -12,7 +12,7 @@ abstract class BaseAdapter<T>(
 ) : RecyclerView.Adapter<BaseAdapter.BaseViewHolder<T>>() {
     
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], position)
     }
     
     override fun getItemCount() = items.size
@@ -87,7 +87,7 @@ abstract class BaseAdapter<T>(
             get() = field ?: throw IllegalStateException("Can't retrieve item before bind call")
         
         @CallSuper
-        open fun bind(item: T) {
+        open fun bind(item: T, position: Int) {
             this.item = item
         }
     }

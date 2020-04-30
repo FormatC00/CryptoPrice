@@ -70,10 +70,7 @@ open class BasePresenter<V : BaseContract.View>(
         return disposable
     }
     
-    protected fun <T> subscribe(
-        upstream: Maybe<T>,
-        onNext: Consumer<T>
-    ) {
+    protected fun <T> subscribe(upstream: Maybe<T>, onNext: Consumer<T>) {
         val disposable = upstream.subscribeOn(backgroundScheduler)
             .observeOn(foregroundScheduler)
             .subscribe(onNext, Consumer { this.onError(it) })
@@ -81,10 +78,10 @@ open class BasePresenter<V : BaseContract.View>(
         addDisposable(disposable)
     }
     
-    protected fun <T> subscribe(upstream: Single<T>, onSuccess: Consumer<T>) {
+    protected fun <T> subscribe(upstream: Single<T>, onSuccess: (T) -> Unit) {
         val disposable = upstream.subscribeOn(backgroundScheduler)
             .observeOn(foregroundScheduler)
-            .subscribe(onSuccess, Consumer { this.onError(it) })
+            .subscribe({ onSuccess(it) }, { this.onError(it) })
         
         addDisposable(disposable)
     }

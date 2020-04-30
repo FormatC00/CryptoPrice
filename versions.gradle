@@ -39,6 +39,7 @@ ext {
             tests      : [
                     junit: "4.12",
                     mockito: "3.3.3",
+                    robolectric: "4.3"
             ]
     ]
 }

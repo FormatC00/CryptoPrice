@@ -1,6 +1,7 @@
 package com.github.formatc00.di.module
 
 import android.app.Application
+import android.content.Context
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -18,4 +19,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideGson() = Gson()
+    
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideResources(context: Context) = context.resources
 }

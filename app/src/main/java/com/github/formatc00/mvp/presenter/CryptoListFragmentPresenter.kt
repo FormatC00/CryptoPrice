@@ -15,4 +15,10 @@ class CryptoListFragmentPresenter(
     backgroundScheduler,
     foregroundScheduler,
     router
-), CryptoListFragmentContract.Presenter
+), CryptoListFragmentContract.Presenter {
+    
+    override fun onFirstAttach() {
+        super.onFirstAttach()
+        subscribe(cryptoFacade.getCryptocurrenciesMap(), getView()::showData)
+    }
+}

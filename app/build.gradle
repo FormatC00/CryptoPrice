@@ -27,6 +27,12 @@ android {
                           'proguard-rules.pro'
         }
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -73,4 +79,5 @@ dependencies {
     // test
     testImplementation "junit:junit:$versions.tests.junit"
     testImplementation "org.mockito:mockito-inline:$versions.tests.mockito"
+    testImplementation "org.robolectric:robolectric:$versions.tests.robolectric"
 }
