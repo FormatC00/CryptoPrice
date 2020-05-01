@@ -13,7 +13,8 @@ class CryptoFacadeImpl @Inject constructor(
     private val repository: CryptoRepository
 ) : CryptoFacade {
     
-    override fun getCryptocurrenciesMap() = repository.getMap().flatMap(::getExtendedMapSingle)
+    override fun getCryptocurrenciesMap(offset: Int) =
+        repository.getMap(offset).flatMap(::getExtendedMapSingle)
     
     private fun getExtendedMapSingle(cryptocurrencies: List<Cryptocurrency>): Single<List<Cryptocurrency>> {
         val ids = formatStringIds(cryptocurrencies)

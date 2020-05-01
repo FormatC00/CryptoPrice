@@ -19,7 +19,28 @@ class CryptoListAdapter(
     private val numbersManager: NumbersManager
 ) : BaseAdapter<Cryptocurrency>() {
     
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CryptoHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        when (viewType) {
+            LOADING_VIEW_TYPE -> ProgressHolder(parent)
+            DATA_VIEW_TYPE -> CryptoHolder(parent)
+            else -> throw IllegalStateException("Unknown view type: $viewType")
+        }
+    
+    override fun getItemViewType(position: Int) =
+        if (items.getOrNull(position) == null) LOADING_VIEW_TYPE else DATA_VIEW_TYPE
+    
+    fun showPaginationLoading() {
+        addItem(null)
+    }
+    
+    fun hidePaginationLoading() {
+        removeItemAt(itemCount - 1)
+    }
+    
+    inner class ProgressHolder(
+        parent: ViewGroup,
+        @LayoutRes layoutRes: Int = R.layout.item_loading
+    ) : BaseAdapter.BaseViewHolder<Cryptocurrency>(parent, layoutRes)
     
     inner class CryptoHolder(
         parent: ViewGroup,
@@ -68,5 +89,12 @@ class CryptoListAdapter(
                 }
             }
         }
+    }
+    
+    companion object {
+        
+        const val LOADING_VIEW_TYPE = 10
+        
+        const val DATA_VIEW_TYPE = 20
     }
 }

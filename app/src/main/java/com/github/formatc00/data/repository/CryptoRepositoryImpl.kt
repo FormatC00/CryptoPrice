@@ -14,7 +14,7 @@ class CryptoRepositoryImpl @Inject constructor(
     private val cryptocurrencyQuoteMapper: CryptocurrencyQuoteMapper
 ) : CryptoRepository {
     
-    override fun getMap() = api.getMap().map(cryptocurrencyMapper::map)
+    override fun getMap(offset: Int) = api.getMap(offset).map(cryptocurrencyMapper::map)
     
     override fun getMetadata(ids: String) = api.getMetadata(ids)
         .map(cryptocurrencyMetadataMapper::map)

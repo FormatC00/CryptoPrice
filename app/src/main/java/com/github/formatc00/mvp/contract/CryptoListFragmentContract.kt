@@ -8,7 +8,18 @@ interface CryptoListFragmentContract {
     interface View : BaseContract.View {
         
         fun showData(data: List<Cryptocurrency>)
+    
+        fun showPaginationProgress()
+    
+        fun hidePaginationProgress()
     }
     
-    interface Presenter : BaseContract.Presenter<View>
+    interface Presenter : BaseContract.Presenter<View> {
+        
+        var isLastPage: Boolean
+        
+        var isLoading: Boolean
+        
+        fun onLoadMoreItems()
+    }
 }

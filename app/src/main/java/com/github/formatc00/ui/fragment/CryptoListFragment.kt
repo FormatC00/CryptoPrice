@@ -8,6 +8,7 @@ import com.github.formatc00.R
 import com.github.formatc00.core.entity.Cryptocurrency
 import com.github.formatc00.mvp.contract.CryptoListFragmentContract
 import com.github.formatc00.ui.adapter.CryptoListAdapter
+import com.github.formatc00.ui.adapter.listener.PaginationScrollListener
 import com.github.formatc00.util.NumbersManager
 import kotlinx.android.synthetic.main.fragment_list.list
 import javax.inject.Inject
@@ -30,11 +31,33 @@ class CryptoListFragment :
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val manager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         list.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+        list.layoutManager = manager
         list.adapter = adapter
+        list.addOnScrollListener(object : PaginationScrollListener(manager) {
+        
+            override val isLastPage
+                get() = presenter.isLastPage
+        
+            override val isLoading
+                get() = presenter.isLoading
+        
+            override fun loadMoreItems() {
+                presenter.onLoadMoreItems()
+            }
+        })
     }
     
     override fun showData(data: List<Cryptocurrency>) {
-        adapter.replaceItems(data)
+        adapter.addAll(data)
+    }
+    
+    override fun showPaginationProgress() {
+        adapter.showPaginationLoading()
+    }
+    
+    override fun hidePaginationProgress() {
+        adapter.hidePaginationLoading()
     }
 }

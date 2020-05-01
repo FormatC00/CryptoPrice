@@ -33,3 +33,5 @@ const val CHAT = "CHAT"
 const val EXPLORER = "EXPLORER"
 
 const val SOURCE_CODE = "SOURCE_CODE"
+
+const val TEST_OFFSET = 1

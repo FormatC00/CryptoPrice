@@ -8,24 +8,24 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseAdapter<T>(
-    private val items: MutableList<T> = ArrayList()
+    protected val items: MutableList<T?> = ArrayList()
 ) : RecyclerView.Adapter<BaseAdapter.BaseViewHolder<T>>() {
     
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
-        holder.bind(items[position], position)
+        items[position]?.apply { holder.bind(this, position) }
     }
     
     override fun getItemCount() = items.size
     
     fun addItem(item: T?) {
-        item?.apply {
+        item.apply {
             items.add(this)
             notifyItemInserted(items.size)
         }
     }
     
     fun addItemAt(position: Int, item: T?) {
-        item?.apply {
+        item.apply {
             items.add(position, this)
             notifyItemInserted(position)
         }

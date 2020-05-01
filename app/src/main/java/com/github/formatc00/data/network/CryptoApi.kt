@@ -7,10 +7,14 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+const val CRYPTOCURRENCIES_MAP_LIMIT = 100
+
+const val CRYPTOCURRENCIES_MAP_DEFAULT_OFFSET = 1
+
 interface CryptoApi {
     
-    @GET("/v1/cryptocurrency/map?sort=cmc_rank&limit=100")
-    fun getMap(): Single<CryptocurrencyMapResponse>
+    @GET("/v1/cryptocurrency/map?sort=cmc_rank&limit=$CRYPTOCURRENCIES_MAP_LIMIT")
+    fun getMap(@Query("start") offset: Int = CRYPTOCURRENCIES_MAP_DEFAULT_OFFSET): Single<CryptocurrencyMapResponse>
     
     @GET("/v1/cryptocurrency/info")
     fun getMetadata(@Query("id") ids: String): Single<CryptocurrencyMetadataResponse>

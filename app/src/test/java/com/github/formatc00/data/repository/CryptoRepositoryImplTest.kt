@@ -1,6 +1,7 @@
 package com.github.formatc00.data.repository
 
 import com.github.formatc00.TEST_IDS
+import com.github.formatc00.TEST_OFFSET
 import com.github.formatc00.core.repository.CryptoRepository
 import com.github.formatc00.data.network.CryptoApi
 import com.github.formatc00.data.network.entity.CryptocurrencyMapResponse
@@ -50,7 +51,7 @@ class CryptoRepositoryImplTest {
     fun testCryptocurrencyMap() {
         val mockResponse = mock(CryptocurrencyMapResponse::class.java)
         whenever(api.getMap()).thenReturn(Single.just(mockResponse))
-        repository.getMap().test()?.apply {
+        repository.getMap(TEST_OFFSET).test()?.apply {
             assertNoErrors()
             val values = values()
             assertEquals(values.size, 1)

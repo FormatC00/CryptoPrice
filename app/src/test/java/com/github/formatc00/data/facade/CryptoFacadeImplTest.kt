@@ -4,6 +4,7 @@ import com.github.formatc00.TEST_DESCRIPTION
 import com.github.formatc00.TEST_ID
 import com.github.formatc00.TEST_IDS
 import com.github.formatc00.TEST_NAME
+import com.github.formatc00.TEST_OFFSET
 import com.github.formatc00.TEST_SUPPLY
 import com.github.formatc00.core.entity.Cryptocurrency
 import com.github.formatc00.core.entity.CryptocurrencyMetadata
@@ -41,10 +42,10 @@ class CryptoFacadeImplTest {
             .thenReturn(Single.just(listOf(testMetadata)))
         whenever(cryptoRepository.getQuote(TEST_IDS))
             .thenReturn(Single.just(listOf(testQuote)))
-        whenever(cryptoRepository.getMap())
+        whenever(cryptoRepository.getMap(TEST_OFFSET))
             .thenReturn(Single.just(listOf(testCryptocurrency)))
-        
-        val testObserver = facade.getCryptocurrenciesMap().test()
+    
+        val testObserver = facade.getCryptocurrenciesMap(TEST_OFFSET).test()
         testObserver?.apply {
             assertNoErrors()
             assertEquals(valueCount(), 1)

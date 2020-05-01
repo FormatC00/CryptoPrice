@@ -9,7 +9,7 @@
   <string name="back">Back</string>
   
   <string name="price_difference_pattern">%1$s%2$.2f%%</string>
-  <string name="price_pattern">$%1$.2f</string>
+  <string name="price_pattern">$%1$f</string>
   <string name="capitalization_pattern">Cap: %1$s</string>
   
   <string name="thousand_pattern">%1$.2f K</string>

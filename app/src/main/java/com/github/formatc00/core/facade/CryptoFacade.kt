@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface CryptoFacade {
     
-    fun getCryptocurrenciesMap(): Single<List<Cryptocurrency>>
+    fun getCryptocurrenciesMap(offset: Int): Single<List<Cryptocurrency>>
 }

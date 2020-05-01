@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 interface CryptoRepository {
     
-    fun getMap(): Single<List<Cryptocurrency>>
+    fun getMap(offset: Int): Single<List<Cryptocurrency>>
     
     fun getMetadata(ids: String): Single<List<CryptocurrencyMetadata>>
     
