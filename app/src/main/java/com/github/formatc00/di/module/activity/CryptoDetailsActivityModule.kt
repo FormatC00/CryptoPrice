@@ -5,9 +5,9 @@ import com.github.formatc00.di.qualifier.execution.Background
 import com.github.formatc00.di.qualifier.execution.Foreground
 import com.github.formatc00.di.scope.ActivityScope
 import com.github.formatc00.mvp.base.MessageInterface
-import com.github.formatc00.mvp.contract.HomeActivityContract
-import com.github.formatc00.mvp.presenter.HomeActivityPresenter
-import com.github.formatc00.ui.activity.HomeActivity
+import com.github.formatc00.mvp.contract.CryptoDetailsActivityContract
+import com.github.formatc00.mvp.presenter.CryptoDetailsActivityPresenter
+import com.github.formatc00.ui.activity.CryptoDetailsActivity
 import com.github.formatc00.ui.dialog.AlertMessageInterface
 import com.github.formatc00.ui.navigation.BaseNavigator
 import dagger.Module
@@ -16,16 +16,16 @@ import io.reactivex.Scheduler
 import ru.terrakok.cicerone.Router
 
 @Module
-class HomeActivityModule {
+class CryptoDetailsActivityModule {
     
     @ActivityScope
     @Provides
-    fun provideMessageInterface(activity: HomeActivity): MessageInterface =
+    fun provideMessageInterface(activity: CryptoDetailsActivity): MessageInterface =
         AlertMessageInterface(activity)
     
     @ActivityScope
     @Provides
-    fun provideNavigator(activity: HomeActivity): BaseNavigator = BaseNavigator(activity)
+    fun provideNavigator(activity: CryptoDetailsActivity): BaseNavigator = BaseNavigator(activity)
     
     @ActivityScope
     @Provides
@@ -33,10 +33,10 @@ class HomeActivityModule {
         @Background backgroundScheduler: Scheduler,
         @Foreground foregroundScheduler: Scheduler,
         router: Router
-    ): HomeActivityContract.Presenter =
-        HomeActivityPresenter(backgroundScheduler, foregroundScheduler, router)
+    ): CryptoDetailsActivityContract.Presenter =
+        CryptoDetailsActivityPresenter(backgroundScheduler, foregroundScheduler, router)
     
     @ActivityScope
     @Provides
-    fun provideActivity(activity: HomeActivity): Activity = activity
+    fun provideActivity(activity: CryptoDetailsActivity): Activity = activity
 }

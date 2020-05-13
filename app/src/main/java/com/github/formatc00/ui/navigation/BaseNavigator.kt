@@ -8,7 +8,7 @@ import com.github.formatc00.R
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 
-abstract class BaseNavigator internal constructor(
+open class BaseNavigator internal constructor(
     private val fragmentActivity: FragmentActivity
 ) : SupportAppNavigator(fragmentActivity, containerId) {
     

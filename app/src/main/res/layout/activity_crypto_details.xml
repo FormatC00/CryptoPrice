@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/icon_bitcoin" />
+            
+            <TextView
+                android:id="@+id/titleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/logo"
+                app:layout_constraintTop_toTopOf="@+id/logo"
+                tools:text="Bitcoin" />
+            
+            <TextView
+                android:id="@+id/subtitleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="@+id/titleLabel"
+                app:layout_constraintTop_toBottomOf="@+id/titleLabel"
+                tools:text="BTC" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    </androidx.appcompat.widget.Toolbar>
+    
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp">
+            
+            <LinearLayout
+                android:id="@+id/urlsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aboutDetailsLabel">
+                
+                <com.github.formatc00.ui.widget.UrlView
+                    android:id="@+id/websiteUrl"
+                    style="@style/RippleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:resource="@string/website" />
+                
+                <com.github.formatc00.ui.widget.UrlView
+                    android:id="@+id/announcementUrl"
+                    style="@style/RippleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:resource="@string/announcement" />
+                
+                <com.github.formatc00.ui.widget.UrlView
+                    android:id="@+id/redditUrl"
+                    style="@style/RippleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:resource="@string/reddit" />
+                
+                <com.github.formatc00.ui.widget.UrlView
+                    android:id="@+id/twitterUrl"
+                    style="@style/RippleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:resource="@string/twitter" />
+                
+                <com.github.formatc00.ui.widget.UrlView
+                    android:id="@+id/messageBoardUrl"
+                    style="@style/RippleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:resource="@string/message_board" />
+                
+                <com.github.formatc00.ui.widget.UrlView
+                    android:id="@+id/explorerUrl"
+                    style="@style/RippleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:resource="@string/explorer" />
+                
+                <com.github.formatc00.ui.widget.UrlView
+                    android:id="@+id/sourceCodeUrl"
+                    style="@style/RippleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:resource="@string/source_code" />
+                
+                <com.github.formatc00.ui.widget.UrlView
+                    android:id="@+id/techDocUrl"
+                    style="@style/RippleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:resource="@string/tech_doc" />
+                
+                <com.github.formatc00.ui.widget.UrlView
+                    android:id="@+id/chatUrl"
+                    style="@style/RippleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:resource="@string/chat" />
+            
+            </LinearLayout>
+            
+            <TextView
+                android:id="@+id/aboutDetailsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aboutLabel" />
+            
+            <TextView
+                android:id="@+id/aboutLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/priceLabel"
+                tools:text="About Bitcoin" />
+            
+            <TextView
+                android:id="@+id/priceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="$9267.42" />
+            
+            <TextView
+                android:id="@+id/priceChangeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/priceLabel"
+                tools:text="+3.12%"
+                tools:textColor="@color/price_up_color" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

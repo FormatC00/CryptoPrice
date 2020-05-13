@@ -1,8 +1,10 @@
 package com.github.formatc00.di.module
 
+import com.github.formatc00.di.module.activity.CryptoDetailsActivityModule
 import com.github.formatc00.di.module.activity.HomeActivityFragmentProvider
 import com.github.formatc00.di.module.activity.HomeActivityModule
 import com.github.formatc00.di.scope.ActivityScope
+import com.github.formatc00.ui.activity.CryptoDetailsActivity
 import com.github.formatc00.ui.activity.HomeActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -11,10 +13,21 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivitiesModule {
     
     @ActivityScope
-    @ContributesAndroidInjector(modules = [
-        HomeActivityFragmentProvider::class,
-        HomeActivityModule::class,
-        NavigationModule::class
-    ])
+    @ContributesAndroidInjector(
+        modules = [
+            HomeActivityFragmentProvider::class,
+            HomeActivityModule::class,
+            NavigationModule::class
+        ]
+    )
     abstract fun contributesHomeActivity(): HomeActivity
+    
+    @ActivityScope
+    @ContributesAndroidInjector(
+        modules = [
+            CryptoDetailsActivityModule::class,
+            NavigationModule::class
+        ]
+    )
+    abstract fun contributesCryptoDetailsActivity(): CryptoDetailsActivity
 }

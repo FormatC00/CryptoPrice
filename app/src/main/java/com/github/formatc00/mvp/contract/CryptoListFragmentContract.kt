@@ -21,5 +21,7 @@ interface CryptoListFragmentContract {
         var isLoading: Boolean
         
         fun onLoadMoreItems()
+    
+        fun onCryptoItemClick(cryptocurrency: Cryptocurrency)
     }
 }

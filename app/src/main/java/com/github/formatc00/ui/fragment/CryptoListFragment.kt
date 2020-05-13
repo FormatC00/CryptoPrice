@@ -10,6 +10,7 @@ import com.github.formatc00.mvp.contract.CryptoListFragmentContract
 import com.github.formatc00.ui.adapter.CryptoListAdapter
 import com.github.formatc00.ui.adapter.listener.PaginationScrollListener
 import com.github.formatc00.util.NumbersManager
+import com.github.formatc00.util.UiUtils
 import kotlinx.android.synthetic.main.fragment_list.list
 import javax.inject.Inject
 
@@ -22,11 +23,14 @@ class CryptoListFragment :
     @Inject
     lateinit var numbersManager: NumbersManager
     
+    @Inject
+    lateinit var uiUtils: UiUtils
+    
     private lateinit var adapter: CryptoListAdapter
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = CryptoListAdapter(numbersManager)
+        adapter = CryptoListAdapter(numbersManager, uiUtils, presenter::onCryptoItemClick)
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

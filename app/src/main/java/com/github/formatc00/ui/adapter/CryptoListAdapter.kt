@@ -2,21 +2,23 @@ package com.github.formatc00.ui.adapter
 
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.github.formatc00.R
 import com.github.formatc00.core.entity.Cryptocurrency
 import com.github.formatc00.util.NumbersManager
+import com.github.formatc00.util.UiUtils
 import kotlinx.android.synthetic.main.item_cryptocurrency.view.capitalizationLabel
-import kotlinx.android.synthetic.main.item_cryptocurrency.view.differenceLabel
 import kotlinx.android.synthetic.main.item_cryptocurrency.view.logo
 import kotlinx.android.synthetic.main.item_cryptocurrency.view.nameLabel
 import kotlinx.android.synthetic.main.item_cryptocurrency.view.numberLabel
+import kotlinx.android.synthetic.main.item_cryptocurrency.view.priceChangeLabel
 import kotlinx.android.synthetic.main.item_cryptocurrency.view.priceLabel
 import kotlinx.android.synthetic.main.item_cryptocurrency.view.symbolLabel
 
 class CryptoListAdapter(
-    private val numbersManager: NumbersManager
+    private val numbersManager: NumbersManager,
+    private val uiUtils: UiUtils,
+    private val onItemClick: (Cryptocurrency) -> Unit
 ) : BaseAdapter<Cryptocurrency>() {
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -54,8 +56,8 @@ class CryptoListAdapter(
         private val nameLabel = itemView.nameLabel
         
         private val symbolLabel = itemView.symbolLabel
-        
-        private val differenceLabel = itemView.differenceLabel
+    
+        private val priceChangeLabel = itemView.priceChangeLabel
         
         private val priceLabel = itemView.priceLabel
         
@@ -70,16 +72,7 @@ class CryptoListAdapter(
             nameLabel.text = item.name
             symbolLabel.text = item.symbol
             item.quote?.apply {
-                percentChange1h?.also {
-                    val sign = if (it > 0.0) "+" else ""
-                    val colorRes = if (it >= 0.0)
-                        R.color.price_up_color
-                    else
-                        R.color.price_down_color
-                    differenceLabel.setTextColor(ContextCompat.getColor(itemView.context, colorRes))
-                    differenceLabel.text =
-                        resources.getString(R.string.price_difference_pattern, sign, it)
-                }
+                uiUtils.setupPriceChange(percentChange1h, priceChangeLabel)
                 
                 priceLabel.text = resources.getString(R.string.price_pattern, price)
                 marketCapitalization?.apply {
@@ -88,6 +81,8 @@ class CryptoListAdapter(
                         resources.getString(R.string.capitalization_pattern, cap)
                 }
             }
+    
+            itemView.setOnClickListener { onItemClick(item) }
         }
     }
     

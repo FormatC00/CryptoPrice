@@ -17,4 +17,17 @@
   <string name="billion_pattern">%1$.2f Bn</string>
   <string name="trillion_pattern">%1$.2f Tn</string>
   <string name="quadrillion_pattern">%1$.2f Qn</string>
+    
+    <string name="url_open_invalid_url">You\'re trying to open the invalid URL</string>
+    <string name="url_open_no_app">Can\'t find an application to handle this request. Please install a web browser</string>
+    <string name="about_label_pattern">About %1$s</string>
+    <string name="website">Website</string>
+    <string name="announcement">Announcement</string>
+    <string name="reddit">Reddit</string>
+    <string name="twitter">Twitter</string>
+    <string name="message_board">Message Board</string>
+    <string name="explorer">Explorer</string>
+    <string name="source_code">Source Code</string>
+    <string name="tech_doc">Tech Doc</string>
+    <string name="chat">Chat</string>
 </resources>

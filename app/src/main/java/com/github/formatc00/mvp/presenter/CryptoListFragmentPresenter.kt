@@ -1,10 +1,12 @@
 package com.github.formatc00.mvp.presenter
 
+import com.github.formatc00.core.entity.Cryptocurrency
 import com.github.formatc00.core.facade.CryptoFacade
 import com.github.formatc00.data.network.CRYPTOCURRENCIES_MAP_DEFAULT_OFFSET
 import com.github.formatc00.data.network.CRYPTOCURRENCIES_MAP_LIMIT
 import com.github.formatc00.mvp.base.BasePresenter
 import com.github.formatc00.mvp.contract.CryptoListFragmentContract
+import com.github.formatc00.ui.navigation.Screens
 import io.reactivex.Scheduler
 import ru.terrakok.cicerone.Router
 
@@ -27,6 +29,10 @@ class CryptoListFragmentPresenter(
     
     override fun onLoadMoreItems() {
         loadData()
+    }
+    
+    override fun onCryptoItemClick(cryptocurrency: Cryptocurrency) {
+        router.navigateTo(Screens.CryptoDetailsScreen(cryptocurrency))
     }
     
     override fun onFirstAttach() {
