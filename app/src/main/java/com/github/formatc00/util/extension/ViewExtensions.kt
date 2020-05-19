@@ -7,3 +7,11 @@ var View.visible: Boolean
         visibility = if (value) View.VISIBLE else View.GONE
     }
     get() = visibility == View.VISIBLE
+
+fun View.show() {
+    visible = true
+}
+
+fun View.hide() {
+    visible = false
+}

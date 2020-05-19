@@ -25,7 +25,7 @@ class CryptoListFragmentPresenter(
     
     override var isLoading = false
     
-    private var offset = 1
+    private var offset = CRYPTOCURRENCIES_MAP_DEFAULT_OFFSET
     
     override fun onLoadMoreItems() {
         loadData()
@@ -41,28 +41,37 @@ class CryptoListFragmentPresenter(
     }
     
     private fun loadData() {
-        showPaginationProgress()
+        showProgress()
         
         val dataSingle = cryptoFacade.getCryptocurrenciesMap(offset)
-            .doOnError { hidePaginationProgress() }
-            .doOnDispose { hidePaginationProgress() }
-        
+            .doOnError { hideProgress() }
+            .doOnDispose { hideProgress() }
+    
+        val view = getView()
         subscribe(dataSingle) {
-            hidePaginationProgress()
+            hideProgress()
             isLastPage = it.isEmpty()
-            getView().showData(it)
+            view.showData(it)
             
             offset += CRYPTOCURRENCIES_MAP_LIMIT
         }
     }
     
-    private fun showPaginationProgress() {
-        if (offset > CRYPTOCURRENCIES_MAP_DEFAULT_OFFSET) getView().showPaginationProgress()
+    private fun showProgress() {
+        if (offset > CRYPTOCURRENCIES_MAP_DEFAULT_OFFSET) {
+            getView().showPaginationProgress()
+        } else {
+            getView().showInitialProgress()
+        }
         isLoading = true
     }
     
-    private fun hidePaginationProgress() {
-        if (offset > CRYPTOCURRENCIES_MAP_DEFAULT_OFFSET) getView().hidePaginationProgress()
+    private fun hideProgress() {
+        if (offset > CRYPTOCURRENCIES_MAP_DEFAULT_OFFSET) {
+            getView().hidePaginationProgress()
+        } else {
+            getView().hideInitialProgress()
+        }
         isLoading = false
     }
 }

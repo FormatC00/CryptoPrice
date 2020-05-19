@@ -12,6 +12,10 @@ interface CryptoListFragmentContract {
         fun showPaginationProgress()
     
         fun hidePaginationProgress()
+    
+        fun showInitialProgress()
+    
+        fun hideInitialProgress()
     }
     
     interface Presenter : BaseContract.Presenter<View> {
